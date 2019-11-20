@@ -2,6 +2,7 @@ package profile
 
 import (
 	"fmt"
+
 	iiifimage "github.com/go-iiif/go-iiif/image"
 	iiiflevel "github.com/go-iiif/go-iiif/level"
 	iiifservice "github.com/go-iiif/go-iiif/service"
@@ -30,7 +31,7 @@ func NewProfile(endpoint string, image iiifimage.Image, level iiiflevel.Level) (
 
 	p := Profile{
 		Context:  "http://iiif.io/api/image/2/context.json",
-		Id:       fmt.Sprintf("%s/%s", endpoint, image.Identifier()),
+		Id:       fmt.Sprintf("%s/iiif/%s", endpoint, image.Identifier()),
 		Type:     "iiif:Image",
 		Protocol: "http://iiif.io/api/image",
 		Width:    dims.Width(),
