@@ -25,10 +25,10 @@ RUN wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSIO
     libwebp-dev orc-dev tiff-dev poppler-dev librsvg-dev libgsf-dev openexr-dev \
     && cd /tmp/vips-${VIPS_VERSION} \
     && ./configure --prefix=${VIPS_DIR} \
-                   --disable-static \
-		   --without-python \
-                   --disable-dependency-tracking \
-                   --enable-silent-rules \
+    --disable-static \
+    --without-python \
+    --disable-dependency-tracking \
+    --enable-silent-rules \
     && make -s install-strip \
     && cd /go-iiif \
     && make cli-tools
@@ -47,9 +47,11 @@ RUN apk update \
     libjpeg-turbo libexif lcms2 fftw giflib libpng \
     libwebp orc tiff poppler-glib librsvg libgsf openexr \
     ca-certificates
-    
+
 RUN mkdir /etc/go-iiif
 RUN mkdir /usr/local/go-iiif
 
 VOLUME /etc/go-iiif
 VOLUME /usr/local/go-iiif
+
+CMD /bin/iiif-server -host 0.0.0.0 -port 8080 -config-source file:///etc/iiif-server -config-name config.json
